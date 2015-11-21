@@ -28,15 +28,21 @@ with open(sys.argv[1]) as gpl:
 
 pattern3 = re.compile('.*series_matrix_table_begin')
 pattern4 = re.compile('.*series_matrix_table_end')
+title_pattern = re.compile('.*Sample_title')
 with open(sys.argv[2])as matrix:
     line = matrix.readline()
     head = None
     in_data = False
     while line:
+        title_match = title_pattern.match(line)
+        if title_match:
+            title = re.sub('\"','',line)
+            title = re.sub('^\!','',title)
+            print title.strip()
         match = pattern3.match(line)
         if match:
             head = matrix.readline()
-            print head.strip()
+            #print head.strip()
             in_data = True
         else:
             match = pattern4.match(line)
