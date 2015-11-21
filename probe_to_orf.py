@@ -2,6 +2,9 @@
 import sys
 import re
 
+"""Convert probe id to orf"""
+
+
 #store probe_info from GPLXX file
 probe_info = {}
 pattern1 = re.compile('.*platform_table_begin')
@@ -54,3 +57,4 @@ with open(sys.argv[2])as matrix:
                 if probe_id in probe_info and probe_info[probe_id][11]:
                     print probe_info[probe_id][11]+"\t"+"\t".join(items[1:])
         line = matrix.readline()
+
